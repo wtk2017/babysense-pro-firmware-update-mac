@@ -128,9 +128,14 @@ def device_run(argv, drive=None, **bot):
     return code, usb
 
 
-def test_device_check():
+def test_device_check(monkeypatch):
+    said = []
+    monkeypatch.setattr(cli.log, "info", said.append)
     code, usb = device_run(["check"])
     assert code == 0 and usb.taken and usb.closed
+    assert said[1].startswith("Parent unit found: SONiXTek 510PF (rev1), 507.1 MB update drive")
+    assert said[2] == "Entries on the drive: 01.00.01.051"
+    assert said[3] == "This unit matches the tested hardware and is ready to update."
 
 
 def test_device_install_success_and_refusals(tmp_path, monkeypatch):

@@ -193,7 +193,7 @@ def _device_check(scsi: BulkOnlyScsi) -> int:
     info = device.identify(scsi)
     summary = device.summarize(scsi, info)
     log.info(
-        f"Parent unit found: {info.vendor} {info.product} (rev {info.revision}), "
+        f"Parent unit found: {info.vendor} {info.product} ({info.revision}), "
         f"{info.megabytes:.1f} MB update drive labelled {summary.volume_label!r}."
     )
     log.info(f"Entries on the drive: {', '.join(summary.files) or '(none)'}")
