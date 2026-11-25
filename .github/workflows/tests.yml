@@ -1,0 +1,32 @@
+name: tests
+
+on:
+  push:
+  pull_request:
+
+permissions:
+  contents: read
+
+jobs:
+  test:
+    runs-on: macos-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+
+      - name: Lint and format check
+        run: |
+          python -m pip install --quiet ruff pytest pytest-cov
+          ruff check .
+          ruff format --check .
+
+      - name: Tests (Python 3.12, with coverage)
+        run: python -m pytest --cov=babysense_mac --cov-report=term-missing
+
+      - name: Tests (macOS's built-in Python 3.9)
+        run: |
+          /usr/bin/python3 -m pip install --quiet --user pytest
+          /usr/bin/python3 -m pytest -q

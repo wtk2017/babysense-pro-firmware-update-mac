@@ -1,0 +1,19 @@
+# Python
+__pycache__/
+*.py[cod]
+.pytest_cache/
+.coverage
+htmlcov/
+.ruff_cache/
+build/
+dist/
+*.egg-info/
+
+# Never commit Babysense's files or device images
+*.msix
+*.bin
+*.img
+*.dmg
+
+# macOS
+.DS_Store

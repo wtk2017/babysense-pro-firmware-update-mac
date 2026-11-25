@@ -1,0 +1,38 @@
+[project]
+name = "babysense-pro-firmware-update-mac"
+version = "1.0.0"
+description = "Install Babysense's official Babysense Pro parent-unit firmware update from a Mac (unofficial)."
+readme = "README.md"
+requires-python = ">=3.9"
+license = { text = "MIT" }
+keywords = ["babysense", "babysense pro", "maxview pro", "baby monitor", "firmware update", "mac", "macos",
+            "battery condition warning", "parent unit"]
+
+[tool.pytest.ini_options]
+testpaths = ["tests"]
+pythonpath = ["."]
+addopts = "-m 'not network'"
+markers = [
+    "unit: fast tests, no hardware, no network",
+    "integration: uses macOS disk tools (hdiutil, fsck_msdos)",
+    "network: talks to Microsoft's servers (run with -m network)",
+]
+
+[tool.coverage.run]
+source = ["babysense_mac"]
+branch = true
+
+[tool.coverage.report]
+show_missing = true
+fail_under = 80
+
+[tool.ruff]
+line-length = 120
+target-version = "py39"
+
+[tool.ruff.lint]
+select = ["E", "F", "W", "I", "B", "UP", "S", "SIM"]
+ignore = ["UP035"]
+
+[tool.ruff.lint.per-file-ignores]
+"tests/*" = ["S101", "S108", "S310", "S603", "S607"]

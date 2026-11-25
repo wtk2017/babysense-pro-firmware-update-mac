@@ -1,0 +1,16 @@
+#!/usr/bin/env python3
+"""Babysense Pro firmware update for Mac. Run `./babysense-update --help`."""
+
+import os
+import sys
+
+if sys.version_info < (3, 9):
+    sys.exit("This tool needs Python 3.9 or newer. Run `xcode-select --install` to get it on a Mac.")
+
+# Appended (not prepended) so a stray file in this folder can never shadow the standard library.
+sys.path.append(os.path.dirname(os.path.realpath(__file__)))
+
+from babysense_mac.cli import main  # noqa: E402
+
+if __name__ == "__main__":
+    sys.exit(main())
