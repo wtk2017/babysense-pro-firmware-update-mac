@@ -9,7 +9,8 @@ from babysense_mac import fat16, simulate
 from babysense_mac.scsi import CBW_SIGNATURE, CSW_SIGNATURE, DeviceGone, StallError
 
 # The parent unit's real USB configuration descriptor (bulk IN 0x8C, bulk OUT 0x0D).
-CONFIG_DESCRIPTOR = bytes.fromhex("0902200001010080fa" "090400000208065000" "07058c02000200" "07050d02000200")
+# Configuration (9 bytes), interface 0 (9), bulk IN endpoint (7), bulk OUT endpoint (7).
+CONFIG_DESCRIPTOR = bytes.fromhex("0902200001010080fa09040000020806500007058c0200020007050d02000200")
 FIRMWARE_SECTOR_SECONDS = 512 / 125_000  # the unit stores ~0.125 MB/s
 
 
